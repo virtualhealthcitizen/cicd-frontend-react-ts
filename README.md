@@ -1,6 +1,6 @@
 # cicd-frontend-react-ts
 
-Frontend app for triggering CI/CD pipelines.
+GitHub Actions workflow dispatcher.
 
 ## Build
 
