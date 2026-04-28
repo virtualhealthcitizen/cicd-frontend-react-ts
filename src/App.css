@@ -651,3 +651,272 @@ textarea:focus {
 .run-queued { background: var(--badge-amber-bg); color: var(--badge-amber-fg); }
 .run-ok     { background: var(--badge-green-bg); color: var(--badge-green-fg); }
 .run-error  { background: var(--badge-coral-bg); color: var(--badge-coral-fg); }
+
+/* ── Workflow runs table ──────────────────────────────────────────────────────── */
+.runs-toolbar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.runs-search {
+    flex: 1;
+    min-width: 180px;
+}
+
+.runs-filter-select {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 120px;
+}
+
+.runs-last-fetched {
+    font-size: 11px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.runs-table-wrap {
+    overflow-x: auto;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+.runs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.runs-th {
+    text-align: left;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    padding: 7px 12px;
+    border-bottom: 0.5px solid var(--border);
+    white-space: nowrap;
+    background: var(--bg-secondary);
+}
+
+.runs-table-row {
+    border-bottom: 0.5px solid var(--border);
+    transition: background 0.1s;
+}
+
+.runs-table-row:last-child {
+    border-bottom: none;
+}
+
+.runs-table-row:hover {
+    background: var(--bg-secondary);
+}
+
+.runs-td {
+    padding: 8px 12px;
+    vertical-align: middle;
+    color: var(--text-primary);
+}
+
+/* Column widths */
+.runs-td-status  { width: 120px; white-space: nowrap; }
+.runs-td-name    { min-width: 200px; max-width: 300px; }
+.runs-td-repo    { white-space: nowrap; }
+.runs-td-branch  { white-space: nowrap; max-width: 120px; overflow: hidden; text-overflow: ellipsis; }
+.runs-td-sha     { white-space: nowrap; }
+.runs-td-actor   { white-space: nowrap; }
+.runs-td-age     { white-space: nowrap; color: var(--text-secondary); font-size: 11px; }
+
+/* Status badges */
+.run-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 100px;
+}
+
+.run-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.run-status-progress  { background: var(--badge-blue-bg);   color: var(--badge-blue-fg); }
+.run-status-success   { background: var(--badge-green-bg);  color: var(--badge-green-fg); }
+.run-status-failure   { background: var(--badge-coral-bg);  color: var(--badge-coral-fg); }
+.run-status-cancelled { background: var(--bg-secondary);    color: var(--text-secondary); border: 0.5px solid var(--border-mid); }
+.run-status-skipped   { background: var(--bg-secondary);    color: var(--text-secondary); border: 0.5px solid var(--border-mid); }
+.run-status-warning   { background: var(--badge-amber-bg);  color: var(--badge-amber-fg); }
+.run-status-neutral   { background: var(--bg-secondary);    color: var(--text-secondary); border: 0.5px solid var(--border-mid); }
+
+.run-status-dot-progress {
+    background: var(--badge-blue-fg);
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.35; }
+}
+
+/* Name column */
+.runs-name-link {
+    display: block;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 280px;
+}
+
+.runs-name-link:hover {
+    color: var(--tab-active-color);
+    text-decoration: underline;
+}
+
+.runs-event-tag {
+    display: inline-block;
+    margin-top: 2px;
+    font-size: 10px;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    padding: 0 5px;
+    font-family: var(--font-mono);
+}
+
+/* Repo / branch / sha labels */
+.runs-repo-label {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+}
+
+.runs-branch-label {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    display: inline-block;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.runs-sha {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+}
+
+/* Actor */
+.runs-actor {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.runs-avatar {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* Footer */
+.runs-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.runs-live-badge {
+    color: var(--dot-green);
+    font-weight: 500;
+}
+
+/* Empty state */
+.runs-empty {
+    padding: 24px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+/* ── Pager ───────────────────────────────────────────────────────────────────── */
+.runs-pager {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 0.5px solid var(--border);
+}
+
+.runs-pager-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.runs-pager-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.runs-pager-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.runs-pagesize-select {
+    width: auto;
+    font-size: 12px;
+    padding: 4px 8px;
+}
+
+.runs-pager-info {
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.runs-pager-total {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.runs-pager-btn {
+    padding: 4px 10px;
+    font-size: 13px;
+    min-width: 32px;
+    justify-content: center;
+}
